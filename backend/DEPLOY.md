@@ -1,6 +1,6 @@
-# FinTrack Backend — Deployment Guide
+# Finovo Backend — Deployment Guide
 
-This guide covers deploying the **FinTrack REST API Backend** independently to popular cloud providers.
+This guide covers deploying the **Finovo REST API Backend** independently to popular cloud providers.
 
 ---
 

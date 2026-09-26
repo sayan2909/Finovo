@@ -96,7 +96,7 @@ export async function getAuthUser(req: Request) {
     touchSession(token);
   }
 
-  const { passwordHash: _ph, resetToken: _rt, resetExpires: _re, ...safe } = user;
+  const { passwordHash: _ph, resetToken: _rt, resetExpires: _re, twoFactorSecret: _tfs, ...safe } = user;
   return { ...safe, currentSessionId: currentSession?.id };
 }
 

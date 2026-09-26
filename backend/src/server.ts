@@ -68,7 +68,7 @@ app.use("/api/seed-demo", seedRoutes);
 // Root healthcheck
 app.get("/", (_req, res) => {
   res.json({
-    name: "FinTrack REST API",
+    name: "Finovo REST API",
     version: "2.0.0",
     status: "running",
     port: PORT,
@@ -80,7 +80,7 @@ import { ensureDatabaseReady } from "./db";
 
 // Global error handler (always return JSON, never HTML)
 app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
-  console.error("[FinTrack Backend Error]:", err);
+  console.error("[Finovo Backend Error]:", err);
   const status = err.status || err.statusCode || 500;
   res.status(status).json({
     ok: false,
@@ -93,11 +93,11 @@ async function startServer() {
   try {
     await ensureDatabaseReady();
     app.listen(PORT, () => {
-      console.log(`[FinTrack Backend] Express server running on http://localhost:${PORT}`);
-      console.log(`[FinTrack Backend] Health endpoint: http://localhost:${PORT}/api/health`);
+      console.log(`[Finovo Backend] Express server running on http://localhost:${PORT}`);
+      console.log(`[Finovo Backend] Health endpoint: http://localhost:${PORT}/api/health`);
     });
   } catch (err) {
-    console.error("[FinTrack Backend] Fatal startup error:", err);
+    console.error("[Finovo Backend] Fatal startup error:", err);
     process.exit(1);
   }
 }

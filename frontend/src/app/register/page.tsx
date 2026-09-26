@@ -50,7 +50,7 @@ export default function RegisterPage() {
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900 text-white dark:bg-white/10 dark:text-white dark:border dark:border-white/10 font-bold shadow-lg shadow-xs">
             <Wallet className="h-5 w-5" />
           </div>
-          <span className="text-xl font-extrabold tracking-tight">FinTrack</span>
+          <span className="text-xl font-extrabold tracking-tight">Finovo</span>
         </Link>
 
         <div className="relative">
@@ -59,11 +59,11 @@ export default function RegisterPage() {
             <span className="text-white/80">your finances today.</span>
           </h2>
           <p className="mt-4 max-w-sm text-slate-400 leading-relaxed text-base">
-            Join thousands building healthier money habits with FinTrack.
+            Join thousands building healthier money habits with Finovo.
           </p>
         </div>
 
-        <p className="relative text-sm text-slate-500">© 2026 FinTrack · Take Control of Your Money.</p>
+        <p className="relative text-sm text-slate-500">© 2026 Finovo · Take Control of Your Money.</p>
       </div>
 
       {/* Right panel (Mobile & Desktop Form) */}
@@ -82,7 +82,7 @@ export default function RegisterPage() {
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white dark:bg-white/10 dark:text-white dark:border dark:border-white/10 font-bold shadow-md shadow-xs">
               <Wallet className="h-5 w-5 stroke-[2.5]" />
             </div>
-            <span className="font-black text-lg tracking-tight text-slate-900 dark:text-white">FinTrack</span>
+            <span className="font-black text-lg tracking-tight text-slate-900 dark:text-white">Finovo</span>
           </Link>
         </div>
 
@@ -96,7 +96,7 @@ export default function RegisterPage() {
 
               <div className="mb-6">
                 <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">Create account</h1>
-                <p className="mt-1 text-xs sm:text-sm text-slate-500 dark:text-slate-400">Join FinTrack in under a minute</p>
+                <p className="mt-1 text-xs sm:text-sm text-slate-500 dark:text-slate-400">Join Finovo in under a minute</p>
               </div>
 
               {err && (

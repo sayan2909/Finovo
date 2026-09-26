@@ -211,14 +211,14 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const renderSidebar = (isSidebarCollapsed: boolean) => (
     <div className="flex h-full flex-col">
       <div className={`flex items-center ${isSidebarCollapsed ? "justify-center" : "justify-between"} px-1 py-1`}>
-        <Link href="/dashboard" className="flex items-center gap-2.5 group" title="FinTrack Dashboard">
+        <Link href="/dashboard" className="flex items-center gap-2.5 group" title="Finovo Dashboard">
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white dark:bg-white/[0.08] dark:border dark:border-white/10 shadow-xs group-hover:scale-105 transition-transform font-bold">
             <Wallet className="h-5 w-5 text-white dark:text-emerald-400" />
           </div>
           {!isSidebarCollapsed && (
             <div>
               <div className="flex items-center gap-1.5">
-                <p className="text-base font-bold tracking-tight text-slate-900 dark:text-white">FinTrack</p>
+                <p className="text-base font-bold tracking-tight text-slate-900 dark:text-white">Finovo</p>
                 <span className="rounded-md bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/80 dark:border-emerald-800/40 px-1.5 py-0.5 text-[9px] font-semibold">
                   PRO
                 </span>
@@ -346,7 +346,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               <div className="flex h-7 w-7 items-center justify-center rounded-xl bg-slate-900 text-white dark:bg-white/[0.08] dark:border dark:border-white/10 font-bold text-xs shadow-xs">
                 <span className="text-white dark:text-emerald-400">F</span>
               </div>
-              <span className="font-bold text-sm tracking-tight text-slate-900 dark:text-white">FinTrack</span>
+              <span className="font-bold text-sm tracking-tight text-slate-900 dark:text-white">Finovo</span>
             </div>
 
             {/* Quick Search with shortcut */}

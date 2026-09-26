@@ -6,7 +6,7 @@ const isWindows = process.platform === 'win32';
 const npmCmd = isWindows ? 'npm.cmd' : 'npm';
 
 console.log('====================================================');
-console.log('⚡ Starting FinTrack Production Servers...');
+console.log('⚡ Starting Finovo Production Servers...');
 console.log('   Backend API:  http://localhost:5000');
 console.log('   Frontend App: http://localhost:5173');
 console.log('====================================================\n');

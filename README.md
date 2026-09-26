@@ -1,17 +1,17 @@
-# FinTrack — Financial Analytics & Tracking Platform
+# Finovo — Financial Analytics & Tracking Platform
 
 A modern, high-performance personal finance platform built with **Pure React (Vite)** on the frontend and **Node.js (Express + TypeScript)** on the backend.
 
 > [!NOTE]
 > **Zero Next.js, Zero Apache, Zero PHP**
-> FinTrack does **not** use Next.js, Apache, PHP, or XAMPP. It runs purely on standard Node.js and Vite.
+> Finovo does **not** use Next.js, Apache, PHP, or XAMPP. It runs purely on standard Node.js and Vite.
 
 ---
 
 ## 🏛️ Architecture
 
 ```
-Fintrack/
+Finovo/
 ├── backend/            # Express REST API Server (Port 5000)
 │   ├── src/routes/     # Auth, Transactions, Budgets, Analytics, Goals, Accounts
 │   ├── src/db/         # PostgreSQL (Supabase / local embedded PGlite) + Drizzle ORM

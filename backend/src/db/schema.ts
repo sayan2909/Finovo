@@ -27,6 +27,8 @@ export const users = pgTable(
     notifyGoals: boolean("notify_goals").notNull().default(true),
     notifySummary: boolean("notify_summary").notNull().default(true),
     hasSeenTour: boolean("has_seen_tour").notNull().default(false),
+    twoFactorEnabled: boolean("two_factor_enabled").notNull().default(false),
+    twoFactorSecret: varchar("two_factor_secret", { length: 64 }),
     resetToken: varchar("reset_token", { length: 255 }),
     resetExpires: timestamp("reset_expires", { withTimezone: true }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),

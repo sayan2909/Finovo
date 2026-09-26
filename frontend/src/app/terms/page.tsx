@@ -14,14 +14,14 @@ export default function TermsOfServicePage() {
             className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition"
           >
             <ArrowLeft className="h-4 w-4" />
-            <span>Back to FinTrack</span>
+            <span>Back to Finovo</span>
           </Link>
           <div className="flex items-center gap-2">
             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-900 text-white dark:bg-white/10 dark:text-white dark:border dark:border-white/10 font-bold">
               <Wallet className="h-4 w-4 stroke-[2.5]" />
             </div>
             <span className="font-extrabold text-sm tracking-tight text-slate-900 dark:text-white">
-              FinTrack
+              Finovo
             </span>
           </div>
         </div>
@@ -31,7 +31,7 @@ export default function TermsOfServicePage() {
       <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
         <div className="mb-8 border-b border-slate-200/80 pb-6 dark:border-white/[0.08]">
           <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
-            FinTrack Legal & Terms
+            Finovo Legal & Terms
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             Terms of Service
@@ -49,7 +49,7 @@ export default function TermsOfServicePage() {
               1. Acceptance of Terms & Permitted Usage
             </h2>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              FinTrack provides personal financial management and expense tracking software. By creating an account or accessing the platform, you agree to comply with this User Agreement and all applicable regulations.
+              Finovo provides personal financial management and expense tracking software. By creating an account or accessing the platform, you agree to comply with this User Agreement and all applicable regulations.
             </p>
           </div>
 
@@ -60,7 +60,7 @@ export default function TermsOfServicePage() {
               2. Financial Information & Non-Advisory Disclaimer
             </h2>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              FinTrack provides organizational, analytical, and budgeting tools for informational purposes only. FinTrack is not a chartered financial institution, registered investment advisor, or tax consultancy. Calculations, projections, and reports do not constitute certified financial or accounting advice.
+              Finovo provides organizational, analytical, and budgeting tools for informational purposes only. Finovo is not a chartered financial institution, registered investment advisor, or tax consultancy. Calculations, projections, and reports do not constitute certified financial or accounting advice.
             </p>
           </div>
 
@@ -71,7 +71,7 @@ export default function TermsOfServicePage() {
               3. Account Security & User Credentials
             </h2>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              You are responsible for safeguarding your authentication credentials. FinTrack provides multi-device session management within Settings to monitor and revoke active sessions at your discretion.
+              You are responsible for safeguarding your authentication credentials. Finovo provides multi-device session management within Settings to monitor and revoke active sessions at your discretion.
             </p>
           </div>
 
@@ -82,7 +82,7 @@ export default function TermsOfServicePage() {
               4. Proprietary Data Rights & User Content Ownership
             </h2>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              You retain full and unconditional ownership of all financial transactions, records, and receipts uploaded to your profile. FinTrack claims no proprietary ownership over your personal financial data.
+              You retain full and unconditional ownership of all financial transactions, records, and receipts uploaded to your profile. Finovo claims no proprietary ownership over your personal financial data.
             </p>
           </div>
 
@@ -93,8 +93,8 @@ export default function TermsOfServicePage() {
             </h2>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
               You may terminate your account and erase all associated records at any time via Settings. For questions regarding these Terms of Service or regulatory notices, contact our team at{" "}
-              <a href="mailto:support@fintrack.app" className="font-bold text-emerald-500 hover:underline">
-                support@fintrack.app
+              <a href="mailto:support@finovo.app" className="font-bold text-emerald-500 hover:underline">
+                support@finovo.app
               </a>.
             </p>
           </div>
@@ -102,7 +102,7 @@ export default function TermsOfServicePage() {
 
         {/* Bottom Nav Links */}
         <div className="mt-10 pt-6 border-t border-slate-200/80 dark:border-white/[0.08] flex items-center justify-between text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} FinTrack. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Finovo. All rights reserved.</p>
           <Link href="/privacy" className="font-semibold hover:text-slate-900 dark:hover:text-emerald-500 transition">
             View Privacy Policy →
           </Link>

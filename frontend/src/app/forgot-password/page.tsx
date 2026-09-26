@@ -63,7 +63,7 @@ export default function ForgotPasswordPage() {
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900 text-white dark:bg-white/10 dark:text-white dark:border dark:border-white/10 font-bold shadow-lg shadow-xs">
             <Wallet className="h-5 w-5" />
           </div>
-          <span className="text-xl font-extrabold tracking-tight">FinTrack</span>
+          <span className="text-xl font-extrabold tracking-tight">Finovo</span>
         </Link>
         <div className="relative">
           <h2 className="text-4xl xl:text-5xl font-black leading-[1.08] tracking-tight">
@@ -74,7 +74,7 @@ export default function ForgotPasswordPage() {
             Regain access to your financial milestones, live analytics, and budgets with zero hassle.
           </p>
         </div>
-        <p className="relative text-sm text-slate-500">© 2026 FinTrack · Take Control of Your Money.</p>
+        <p className="relative text-sm text-slate-500">© 2026 Finovo · Take Control of Your Money.</p>
       </div>
 
       {/* Right Form Container (Mobile & Desktop) */}
@@ -93,7 +93,7 @@ export default function ForgotPasswordPage() {
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white dark:bg-white/10 dark:text-white dark:border dark:border-white/10 font-bold shadow-md shadow-xs">
               <Wallet className="h-5 w-5 stroke-[2.5]" />
             </div>
-            <span className="font-black text-lg tracking-tight text-slate-900 dark:text-white">FinTrack</span>
+            <span className="font-black text-lg tracking-tight text-slate-900 dark:text-white">Finovo</span>
           </Link>
         </div>
 

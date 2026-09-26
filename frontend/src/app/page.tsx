@@ -53,7 +53,7 @@ export default function LandingPage() {
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white dark:bg-white/10 dark:text-white dark:border dark:border-white/10 font-bold shadow-xs">
               <Wallet className="h-5 w-5" />
             </div>
-            <span className="text-lg font-extrabold tracking-tight text-slate-900 dark:text-white">FinTrack</span>
+            <span className="text-lg font-extrabold tracking-tight text-slate-900 dark:text-white">Finovo</span>
           </div>
           <nav className="hidden items-center gap-7 text-sm font-medium text-slate-600 dark:text-slate-300 md:flex">
             <a href="#features" className="hover:text-indigo-600 dark:hover:text-emerald-400 transition">Features</a>
@@ -399,7 +399,7 @@ export default function LandingPage() {
           <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-emerald-400 mb-6 sm:mb-8">What users say</p>
           <div className="grid gap-4 sm:grid-cols-3">
             {[
-              { name: "Priya S.",  role: "Freelance Designer",  quote: "FinTrack transformed how I manage irregular income. Recurring payments alone saved me ₹8,000 in missed bills.", stars: 5 },
+              { name: "Priya S.",  role: "Freelance Designer",  quote: "Finovo transformed how I manage irregular income. Recurring payments alone saved me ₹8,000 in missed bills.", stars: 5 },
               { name: "Arjun M.", role: "Software Engineer",    quote: "The financial runway metric is genius. Knowing exactly how many months my savings last gives real peace of mind.", stars: 5 },
               { name: "Sneha R.", role: "Small Business Owner", quote: "CSV import made onboarding instant. Had 6 months of bank data in the app in under 5 minutes. Incredible.", stars: 5 },
             ].map((r) => (
@@ -459,7 +459,7 @@ export default function LandingPage() {
               Start managing your<br className="hidden sm:inline" /> finances today.
             </h2>
             <p className="mx-auto mt-3 max-w-lg text-slate-400 text-sm sm:text-base leading-relaxed">
-              Join FinTrack and build healthier money habits with budgets, goals and smart insights.
+              Join Finovo and build healthier money habits with budgets, goals and smart insights.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
               <Link
@@ -489,7 +489,7 @@ export default function LandingPage() {
               <Wallet className="h-4 w-4 stroke-[2.5]" />
             </div>
             <span className="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">
-              FinTrack
+              Finovo
             </span>
           </div>
 
@@ -591,7 +591,7 @@ export default function LandingPage() {
 
             {/* Copyright */}
             <div className="order-3 text-center sm:text-right">
-              © {new Date().getFullYear()} FinTrack. All rights reserved.
+              © {new Date().getFullYear()} Finovo. All rights reserved.
             </div>
           </div>
         </div>

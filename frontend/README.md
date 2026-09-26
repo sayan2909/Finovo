@@ -1,6 +1,6 @@
-# FinTrack — Frontend Application
+# Finovo — Frontend Application
 
-This folder contains the complete client-side frontend code for the FinTrack personal finance platform.
+This folder contains the complete client-side frontend code for the Finovo personal finance platform.
 
 ## Structure
 

@@ -89,7 +89,7 @@ export function OnboardingModal() {
 
   const STEPS = [
     {
-      title: "Welcome to FinTrack!",
+      title: "Welcome to Finovo!",
       subtitle: "Take full control of your personal finances with effortless tracking, automated calculations, and smart money habits.",
       icon: Wallet,
       color: "from-slate-900 to-black dark:from-[#181c22] dark:to-[#121519]",

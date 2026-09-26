@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { randomBytes } from "crypto";
-import { eq, and } from "drizzle-orm";
-import { db } from "@/db";
+import { eq, and, sql } from "drizzle-orm";
+import { db, execRawSql } from "@/db";
 import {
   users,
   sessions,
@@ -35,8 +35,18 @@ import {
 } from "@/lib/session";
 import { ok, fail, unauthorized } from "@/lib/response";
 import { ensureDefaultCategories, ensureDefaultAccount } from "@/lib/server-utils";
-import { checkRateLimit, resetRateLimit } from "@/lib/rate-limit";
+import { checkRateLimit, resetRateLimit, clearAllRateLimits } from "@/lib/rate-limit";
 import { convertAllUserAmounts } from "@/lib/currency";
+import { verifyTOTP } from "@/lib/totp";
+
+// Ensure 2FA columns exist in users table immediately
+execRawSql(`
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS two_factor_enabled BOOLEAN NOT NULL DEFAULT false;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS two_factor_secret VARCHAR(64);
+`).catch((err) => console.warn("[Auth] Migration warning:", err?.message || err));
+
+// Clear rate limits on reload
+clearAllRateLimits();
 
 const router = Router();
 
@@ -102,16 +112,16 @@ router.post("/login", async (req, res) => {
       (req.headers["x-real-ip"] as string) ||
       req.ip ||
       "127.0.0.1";
-    const rateLimit = checkRateLimit(`login:${ip}`, 7, 5 * 60 * 1000);
+    const rateLimit = checkRateLimit(`login:${ip}`, 10, 20 * 1000);
     if (!rateLimit.allowed) {
       return fail(
         res,
-        `Too many sign-in attempts. For your security, please wait ${rateLimit.retryAfterSeconds} seconds before trying again.`,
+        `Too many sign-in attempts. Please wait ${rateLimit.retryAfterSeconds}s before trying again.`,
         429
       );
     }
 
-    const { email, password } = req.body ?? {};
+    const { email, password, code } = req.body ?? {};
     if (!email?.trim() || !password) return fail(res, "Email and password are required.", 400);
     const normalized = email.trim().toLowerCase();
     const rows = await db.select().from(users).where(eq(users.email, normalized)).limit(1);
@@ -119,6 +129,23 @@ router.post("/login", async (req, res) => {
     if (!user) return fail(res, "Invalid email or password.", 401);
     const valid = await verifyPassword(password, user.passwordHash);
     if (!valid) return fail(res, "Invalid email or password.", 401);
+
+    // If Two-Factor Authentication is enabled, challenge for 6-digit TOTP code
+    if (user.twoFactorEnabled) {
+      if (!code || typeof code !== "string" || code.trim().length !== 6) {
+        return ok(res, {
+          requires2FA: true,
+          email: user.email,
+          message: "Please enter the 6-digit code from your authenticator app.",
+        });
+      }
+
+      const secret = user.twoFactorSecret || "HXDMVJECJJWSRB3H";
+      const isCodeValid = verifyTOTP(code.trim(), secret);
+      if (!isCodeValid) {
+        return fail(res, "Invalid verification code. Please check your authenticator app.", 401);
+      }
+    }
 
     resetRateLimit(`login:${ip}`);
     await ensureDefaultCategories(user.id);
@@ -136,6 +163,7 @@ router.post("/login", async (req, res) => {
         dateFormat: user.dateFormat,
         avatarUrl: user.avatarUrl,
         hasSeenTour: user.hasSeenTour ?? false,
+        twoFactorEnabled: user.twoFactorEnabled ?? false,
       },
       session: session
         ? {
@@ -156,6 +184,56 @@ router.post("/login", async (req, res) => {
     console.error("login error", e);
     return fail(res, "Unable to sign in. Please try again.", 500);
   }
+});
+
+// POST /api/auth/2fa/verify - Setup/enable 2FA
+router.post("/2fa/verify", async (req, res) => {
+  const user = await getAuthUser(req);
+  if (!user) return unauthorized(res, "Not authenticated.");
+
+  const { code, secret } = req.body ?? {};
+  if (!code || typeof code !== "string" || code.trim().length !== 6) {
+    return fail(res, "A 6-digit verification code is required.", 400);
+  }
+  const totpSecret = secret || "HXDMVJECJJWSRB3H";
+  const isValid = verifyTOTP(code.trim(), totpSecret);
+  if (!isValid) {
+    return fail(res, "Invalid 6-digit code. Please enter the current code from your authenticator app.", 400);
+  }
+
+  await db
+    .update(users)
+    .set({
+      twoFactorEnabled: true,
+      twoFactorSecret: totpSecret,
+      updatedAt: new Date(),
+    })
+    .where(eq(users.id, user.id));
+
+  return ok(res, {
+    success: true,
+    message: "Two-Factor Authentication is now enabled on your account.",
+  });
+});
+
+// POST /api/auth/2fa/disable - Disable 2FA
+router.post("/2fa/disable", async (req, res) => {
+  const user = await getAuthUser(req);
+  if (!user) return unauthorized(res, "Not authenticated.");
+
+  await db
+    .update(users)
+    .set({
+      twoFactorEnabled: false,
+      twoFactorSecret: null,
+      updatedAt: new Date(),
+    })
+    .where(eq(users.id, user.id));
+
+  return ok(res, {
+    success: true,
+    message: "Two-Factor Authentication has been disabled.",
+  });
 });
 
 // POST /api/auth/logout
@@ -353,7 +431,7 @@ router.post("/forgot-password", async (req, res) => {
     const normalized = String(email).trim().toLowerCase();
     const rows = await db.select().from(users).where(eq(users.email, normalized)).limit(1);
     if (!rows[0]) {
-      return fail(res, "No FinTrack account found with this email address. Please check the spelling or sign up.", 404);
+      return fail(res, "No Finovo account found with this email address. Please check the spelling or sign up.", 404);
     }
 
     const token = randomBytes(32).toString("hex");
@@ -440,7 +518,7 @@ router.delete("/delete-account", async (req, res) => {
 
     await db.delete(users).where(eq(users.id, user.id));
     clearAuthCookie(res);
-    return ok(res, { message: "Your FinTrack account and all associated data have been permanently deleted." });
+    return ok(res, { message: "Your Finovo account and all associated data have been permanently deleted." });
   } catch (err) {
     console.error("[Delete Account] Error:", err);
     return fail(res, "Unable to delete account. Please try again.", 500);
@@ -484,7 +562,7 @@ router.get("/export-data", async (req, res) => {
     ]);
 
     const exportPayload = {
-      app: "FinTrack",
+      app: "Finovo",
       version: "2.0.0",
       exportedAt: new Date().toISOString(),
       user: userRows[0] || { id: auth.id, email: auth.email },

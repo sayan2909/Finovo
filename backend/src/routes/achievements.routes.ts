@@ -48,7 +48,7 @@ router.get("/", async (req, res) => {
       {
         id: "first_step",
         title: "First Step",
-        description: "Log your first transaction in FinTrack",
+        description: "Log your first transaction in Finovo",
         category: "Tracking",
         tier: "Bronze",
         icon: "Sparkles",

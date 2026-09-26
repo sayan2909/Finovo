@@ -15,6 +15,7 @@ export interface User {
   notifyGoals?: boolean;
   notifySummary?: boolean;
   hasSeenTour?: boolean;
+  twoFactorEnabled?: boolean;
 }
 
 export interface Session {
@@ -36,7 +37,7 @@ interface AuthCtx {
   session: Session | null;
   loading: boolean;
   status: AuthStatus;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string, code?: string) => Promise<{ requires2FA?: boolean; email?: string } | void>;
   register: (data: { name: string; email: string; password: string; confirmPassword: string }) => Promise<void>;
   logout: () => Promise<void>;
   refresh: () => Promise<void>;
@@ -74,15 +75,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     refresh();
   }, [refresh]);
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string, password: string, code?: string) => {
     const res = await fetch("/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, code }),
     });
     const json = await res.json();
     if (!res.ok || !json.success) throw new Error(json.message || "Login failed");
+    if (json.data?.requires2FA) {
+      return { requires2FA: true, email: json.data.email };
+    }
     setUser(json.data.user);
     setSession(json.data.session || null);
   };

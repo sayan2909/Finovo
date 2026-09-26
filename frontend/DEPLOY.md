@@ -1,6 +1,6 @@
-# FinTrack Frontend — Deployment Guide
+# Finovo Frontend — Deployment Guide
 
-This guide covers deploying the **FinTrack Frontend UI Client** independently to popular platforms like Vercel, Netlify, or Docker.
+This guide covers deploying the **Finovo Frontend UI Client** independently to popular platforms like Vercel, Netlify, or Docker.
 
 ---
 

@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "FinTrack — Personal Finance Platform",
-    short_name: "FinTrack",
+    name: "Finovo — Personal Finance Platform",
+    short_name: "Finovo",
     description: "Track your spending, manage budgets, reach your savings goals, and understand your financial habits.",
     start_url: "/",
     display: "standalone",

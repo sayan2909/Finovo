@@ -11,7 +11,7 @@ const router = Router();
 // POST /api/seed-demo
 router.post("/", async (req, res) => {
   const { email, name } = req.body ?? {};
-  const demoEmail = (email || "demo@fintrack.app").toLowerCase();
+  const demoEmail = (email || "demo@finovo.app").toLowerCase();
   let user = (await db.select().from(users).where(eq(users.email, demoEmail)).limit(1))[0];
   if (!user) {
     const rows = await db.insert(users).values({ name: name || "Demo User", email: demoEmail, passwordHash: await hashPassword("Demo@1234"), currency: "INR" }).returning();

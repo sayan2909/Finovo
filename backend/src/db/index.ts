@@ -22,11 +22,17 @@ CREATE TABLE IF NOT EXISTS users (
   notify_goals BOOLEAN NOT NULL DEFAULT true,
   notify_summary BOOLEAN NOT NULL DEFAULT true,
   has_seen_tour BOOLEAN NOT NULL DEFAULT false,
+  two_factor_enabled BOOLEAN NOT NULL DEFAULT false,
+  two_factor_secret VARCHAR(64),
   reset_token VARCHAR(255),
   reset_expires TIMESTAMPTZ,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- Ensure 2FA columns exist if users table was previously created
+ALTER TABLE users ADD COLUMN IF NOT EXISTS two_factor_enabled BOOLEAN NOT NULL DEFAULT false;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS two_factor_secret VARCHAR(64);
 
 CREATE TABLE IF NOT EXISTS categories (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -205,18 +211,18 @@ function initDatabase() {
       pool
         .query(DDL_SCHEMA)
         .then(() => {
-          console.log("[FinTrack DB] Connected to external PostgreSQL and schema verified");
+          console.log("[Finovo DB] Connected to external PostgreSQL and schema verified");
           readyResolve();
         })
         .catch((err) => {
-          console.warn("[FinTrack DB] Auto-DDL warning on external PG:", err.message);
+          console.warn("[Finovo DB] Auto-DDL warning on external PG:", err.message);
           readyResolve();
         });
 
       globalForDb.__fintrackDb = dbInstance;
       return dbInstance;
     } catch (err) {
-      console.warn("[FinTrack DB] Failed to connect to external PostgreSQL, falling back to PGlite:", err);
+      console.warn("[Finovo DB] Failed to connect to external PostgreSQL, falling back to PGlite:", err);
     }
   }
 
@@ -239,7 +245,7 @@ function initDatabase() {
     }
   }
 
-  console.log("[FinTrack DB] Initializing local embedded PGlite database (./data/pgdata)");
+  console.log("[Finovo DB] Initializing local embedded PGlite database (./data/pgdata)");
 
   const pglite =
     globalForDb.__fintrackPglite ??
@@ -255,11 +261,11 @@ function initDatabase() {
     .waitReady
     .then(() => pglite.exec(DDL_SCHEMA))
     .then(() => {
-      console.log("[FinTrack DB] Local PGlite ready — all 9 tables & indexes verified");
+      console.log("[Finovo DB] Local PGlite ready — all 9 tables & indexes verified");
       readyResolve();
     })
     .catch((err) => {
-      console.error("[FinTrack DB] PGlite initialization error:", err);
+      console.error("[Finovo DB] PGlite initialization error:", err);
       readyResolve();
     });
 
@@ -269,6 +275,39 @@ function initDatabase() {
 
 export const db = initDatabase();
 
+// Guarantee 2FA columns exist on active instance immediately on module load
+if (globalForDb.__fintrackPglite) {
+  globalForDb.__fintrackPglite.waitReady.then(() => {
+    return globalForDb.__fintrackPglite!.exec(`
+      ALTER TABLE users ADD COLUMN IF NOT EXISTS two_factor_enabled BOOLEAN NOT NULL DEFAULT false;
+      ALTER TABLE users ADD COLUMN IF NOT EXISTS two_factor_secret VARCHAR(64);
+    `);
+  }).then(() => {
+    console.log("[Finovo DB] 2FA schema columns verified on active PGlite instance");
+  }).catch((err: any) => {
+    console.warn("[Finovo DB] 2FA column migration warning:", err?.message || err);
+  });
+} else if (globalForDb.__fintrackPool) {
+  globalForDb.__fintrackPool.query(`
+    ALTER TABLE users ADD COLUMN IF NOT EXISTS two_factor_enabled BOOLEAN NOT NULL DEFAULT false;
+    ALTER TABLE users ADD COLUMN IF NOT EXISTS two_factor_secret VARCHAR(64);
+  `).catch((err: any) => {
+    console.warn("[Finovo DB] PG 2FA column migration warning:", err?.message || err);
+  });
+}
+
+export async function execRawSql(sqlStr: string): Promise<any> {
+  if (globalForDb.__fintrackPglite) {
+    await globalForDb.__fintrackPglite.waitReady;
+    return globalForDb.__fintrackPglite.exec(sqlStr);
+  }
+  if (globalForDb.__fintrackPool) {
+    return globalForDb.__fintrackPool.query(sqlStr);
+  }
+  return null;
+}
+
 export async function ensureDatabaseReady(): Promise<void> {
   await readyPromise;
 }
+

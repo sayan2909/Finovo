@@ -14,14 +14,14 @@ export default function PrivacyPolicyPage() {
             className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition"
           >
             <ArrowLeft className="h-4 w-4" />
-            <span>Back to FinTrack</span>
+            <span>Back to Finovo</span>
           </Link>
           <div className="flex items-center gap-2">
             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-900 text-white dark:bg-white/10 dark:text-white dark:border dark:border-white/10 font-bold">
               <Wallet className="h-4 w-4 stroke-[2.5]" />
             </div>
             <span className="font-extrabold text-sm tracking-tight text-slate-900 dark:text-white">
-              FinTrack
+              Finovo
             </span>
           </div>
         </div>
@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
       <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
         <div className="mb-8 border-b border-slate-200/80 pb-6 dark:border-white/[0.08]">
           <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
-            FinTrack Legal & Compliance
+            Finovo Legal & Compliance
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             Privacy Policy
@@ -101,8 +101,8 @@ export default function PrivacyPolicyPage() {
             </h2>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
               For questions concerning this Privacy Policy, data governance practices, or to exercise statutory privacy rights, please direct inquiries to{" "}
-              <a href="mailto:privacy@fintrack.app" className="font-bold text-emerald-500 hover:underline">
-                privacy@fintrack.app
+              <a href="mailto:privacy@finovo.app" className="font-bold text-emerald-500 hover:underline">
+                privacy@finovo.app
               </a>.
             </p>
           </div>
@@ -110,7 +110,7 @@ export default function PrivacyPolicyPage() {
 
         {/* Bottom Nav Links */}
         <div className="mt-10 pt-6 border-t border-slate-200/80 dark:border-white/[0.08] flex items-center justify-between text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} FinTrack. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Finovo. All rights reserved.</p>
           <Link href="/terms" className="font-semibold hover:text-slate-900 dark:hover:text-emerald-500 transition">
             View Terms of Service →
           </Link>

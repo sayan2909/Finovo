@@ -377,7 +377,7 @@ export function CsvImportModal({
                   Detected {rawRows.length} rows from <span className="underline font-mono">{fileName || "Statement"}</span>
                 </div>
                 <p className="mt-1 text-[11px] text-slate-600 dark:text-slate-300">
-                  Match each column from your CSV below. FinTrack has automatically pre-selected best matches.
+                  Match each column from your CSV below. Finovo has automatically pre-selected best matches.
                 </p>
               </div>
 

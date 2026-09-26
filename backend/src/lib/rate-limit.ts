@@ -18,7 +18,7 @@ setInterval(() => {
 export function checkRateLimit(
   identifier: string,
   maxAttempts: number = 5,
-  windowMs: number = 5 * 60 * 1000 // 5 minutes
+  windowMs: number = 20 * 1000 // 20 seconds
 ): { allowed: boolean; remaining: number; retryAfterSeconds: number } {
   const now = Date.now();
   const record = rateLimitStore.get(identifier);
@@ -36,11 +36,12 @@ export function checkRateLimit(
   }
 
   if (record.count >= maxAttempts) {
-    const retryAfterSeconds = Math.ceil((record.resetAt - now) / 1000);
+    const rawSeconds = Math.ceil((record.resetAt - now) / 1000);
+    const retryAfterSeconds = Math.max(1, Math.min(20, rawSeconds));
     return {
       allowed: false,
       remaining: 0,
-      retryAfterSeconds: Math.max(1, retryAfterSeconds),
+      retryAfterSeconds,
     };
   }
 
@@ -54,4 +55,8 @@ export function checkRateLimit(
 
 export function resetRateLimit(identifier: string) {
   rateLimitStore.delete(identifier);
+}
+
+export function clearAllRateLimits() {
+  rateLimitStore.clear();
 }
