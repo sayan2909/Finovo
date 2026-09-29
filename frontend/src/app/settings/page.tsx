@@ -28,8 +28,6 @@ import {
   Check,
   Sparkles,
   Camera,
-  Sun,
-  Moon,
   ChevronRight,
   FileSpreadsheet,
   KeyRound,
@@ -45,7 +43,6 @@ import AppShell from "@/components/AppShell";
 import { Card, Button, Field, inputCls, toast, Modal } from "@/components/ui";
 import QRCode from "qrcode";
 import { useAuth, Session } from "@/contexts/AuthContext";
-import { useTheme } from "@/contexts/ThemeContext";
 import { getEstimatedRate, SUPPORTED_CURRENCIES, fetchLiveRates } from "@/lib/currency";
 
 function formatRelativeTime(dateStr: string | Date | undefined) {
@@ -188,7 +185,6 @@ const PRESET_AVATARS = [
 
 export default function SettingsPage() {
   const { user, setUser, logout } = useAuth();
-  const { theme, setTheme } = useTheme();
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
   const [avatarCategory, setAvatarCategory] = useState<"all" | "personas" | "bots" | "shapes">("all");
   const [profile, setProfile] = useState({
@@ -913,7 +909,7 @@ export default function SettingsPage() {
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-slate-900 dark:text-white">Regional & Display</h3>
-                  <p className="text-xs text-slate-500">Currency, date formatting and theme.</p>
+                  <p className="text-xs text-slate-500">Currency and date formatting preferences.</p>
                 </div>
               </div>
               <div className="mt-4 space-y-3.5">
@@ -957,37 +953,6 @@ export default function SettingsPage() {
                     </p>
                   </div>
                 )}
-                <div>
-                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-1.5">
-                    Theme Mode
-                  </label>
-                  <div className="grid grid-cols-2 gap-1.5 rounded-2xl border border-slate-200/80 bg-slate-100/90 p-1.5 dark:border-white/[0.08] dark:bg-[#1b1f26]">
-                    <button
-                      type="button"
-                      onClick={() => setTheme("light")}
-                      className={`flex items-center justify-center gap-2 rounded-xl py-2 px-3 text-xs font-bold transition-all cursor-pointer ${
-                        theme === "light"
-                          ? "bg-white text-slate-900 shadow-xs font-black"
-                          : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                      }`}
-                    >
-                      <Sun className="h-4 w-4 text-amber-500" />
-                      Light Mode
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setTheme("dark")}
-                      className={`flex items-center justify-center gap-2 rounded-xl py-2 px-3 text-xs font-bold transition-all cursor-pointer ${
-                        theme === "dark"
-                          ? "bg-[#15181d] text-white border border-white/[0.12] shadow-xs font-bold"
-                          : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                      }`}
-                    >
-                      <Moon className="h-4 w-4 text-slate-200" />
-                      Dark Mode
-                    </button>
-                  </div>
-                </div>
               </div>
             </Card>
           </div>
