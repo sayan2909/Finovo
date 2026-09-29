@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { db } from "@/db";
-import { transactions, savingsGoals, budgets, recurringTransactions, accounts } from "@/db/schema";
+import { db } from "../db";
+import { transactions, savingsGoals, budgets, recurringTransactions, accounts } from "../db/schema";
 import { eq, sql } from "drizzle-orm";
-import { getAuthUser } from "@/lib/auth";
-import { ok, fail, unauthorized } from "@/lib/response";
+import { getAuthUser } from "../lib/auth";
+import { ok, fail, unauthorized } from "../lib/response";
 
 const router = Router();
 

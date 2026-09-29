@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { getLiveRates, BASE_RATES_USD } from "@/lib/currency";
-import { ok } from "@/lib/response";
+import { getLiveRates, BASE_RATES_USD } from "../lib/currency";
+import { ok } from "../lib/response";
 
 const router = Router();
 

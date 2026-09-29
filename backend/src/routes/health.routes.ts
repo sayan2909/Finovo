@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { execRawSql } from "@/db";
+import { execRawSql } from "../db";
 
 const router = Router();
 

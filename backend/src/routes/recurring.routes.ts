@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { db } from "@/db";
-import { recurringTransactions, categories, transactions, accounts } from "@/db/schema";
+import { db } from "../db";
+import { recurringTransactions, categories, transactions, accounts } from "../db/schema";
 import { and, eq } from "drizzle-orm";
-import { getAuthUser } from "@/lib/auth";
-import { ok, fail, unauthorized, notFound } from "@/lib/response";
-import { parseAmount, nextDueDate, advanceRecurringDueDate } from "@/lib/server-utils";
+import { getAuthUser } from "../lib/auth";
+import { ok, fail, unauthorized, notFound } from "../lib/response";
+import { parseAmount, nextDueDate, advanceRecurringDueDate } from "../lib/server-utils";
 
 const router = Router();
 

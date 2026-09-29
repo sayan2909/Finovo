@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { db } from "@/db";
-import { notifications, budgets, transactions, recurringTransactions, savingsGoals } from "@/db/schema";
+import { db } from "../db";
+import { notifications, budgets, transactions, recurringTransactions, savingsGoals } from "../db/schema";
 import { and, eq, gte, lte, desc } from "drizzle-orm";
-import { getAuthUser } from "@/lib/auth";
-import { ok, unauthorized, notFound } from "@/lib/response";
-import { nextDueDate } from "@/lib/server-utils";
+import { getAuthUser } from "../lib/auth";
+import { ok, unauthorized, notFound } from "../lib/response";
+import { nextDueDate } from "../lib/server-utils";
 
 const router = Router();
 

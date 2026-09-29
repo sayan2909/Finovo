@@ -1,5 +1,5 @@
-import { db } from "@/db";
-import { categories, accounts, notifications } from "@/db/schema";
+import { db } from "../db";
+import { categories, accounts, notifications } from "../db/schema";
 import { and, eq } from "drizzle-orm";
 import { EXPENSE_CATEGORIES, INCOME_CATEGORIES } from "./constants";
 

@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { db } from "@/db";
-import { users, categories, accounts, transactions, budgets, savingsGoals, recurringTransactions } from "@/db/schema";
+import { db } from "../db";
+import { users, categories, accounts, transactions, budgets, savingsGoals, recurringTransactions } from "../db/schema";
 import { eq } from "drizzle-orm";
-import { hashPassword } from "@/lib/auth";
-import { ok } from "@/lib/response";
-import { EXPENSE_CATEGORIES, INCOME_CATEGORIES } from "@/lib/constants";
+import { hashPassword } from "../lib/auth";
+import { ok } from "../lib/response";
+import { EXPENSE_CATEGORIES, INCOME_CATEGORIES } from "../lib/constants";
 
 const router = Router();
 

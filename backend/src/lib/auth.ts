@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import type { Request, Response, NextFunction } from "express";
-import { db } from "@/db";
-import { users, sessions } from "@/db/schema";
+import { db } from "../db";
+import { users, sessions } from "../db/schema";
 import { eq } from "drizzle-orm";
 import { touchSession, createUserSession } from "./session";
 

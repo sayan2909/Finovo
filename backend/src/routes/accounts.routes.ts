@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { db } from "@/db";
-import { accounts, transactions } from "@/db/schema";
+import { db } from "../db";
+import { accounts, transactions } from "../db/schema";
 import { eq, desc, and } from "drizzle-orm";
-import { getAuthUser } from "@/lib/auth";
-import { ok, fail, unauthorized } from "@/lib/response";
+import { getAuthUser } from "../lib/auth";
+import { ok, fail, unauthorized } from "../lib/response";
 
 const router = Router();
 

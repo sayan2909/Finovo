@@ -1,6 +1,5 @@
 import { drizzle as drizzleNodePg } from "drizzle-orm/node-postgres";
-import { drizzle as drizzlePglite } from "drizzle-orm/pglite";
-import { PGlite } from "@electric-sql/pglite";
+import type { PGlite } from "@electric-sql/pglite";
 import { Pool } from "pg";
 import * as schema from "./schema";
 import path from "path";
@@ -249,9 +248,12 @@ function initDatabase() {
 
   console.log("[Finovo DB] Initializing local embedded PGlite database (./data/pgdata)");
 
+  const { PGlite: PGliteClass } = require("@electric-sql/pglite");
+  const { drizzle: drizzlePglite } = require("drizzle-orm/pglite");
+
   const pglite =
     globalForDb.__fintrackPglite ??
-    new PGlite(dataDir);
+    new PGliteClass(dataDir);
 
   if (process.env.NODE_ENV !== "production") {
     globalForDb.__fintrackPglite = pglite;

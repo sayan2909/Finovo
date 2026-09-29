@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { db } from "@/db";
-import { categories, transactions, budgets } from "@/db/schema";
+import { db } from "../db";
+import { categories, transactions, budgets } from "../db/schema";
 import { and, eq, gte, lte } from "drizzle-orm";
-import { getAuthUser } from "@/lib/auth";
-import { ok, fail, unauthorized, notFound } from "@/lib/response";
-import { ensureDefaultCategories } from "@/lib/server-utils";
-import { CATEGORY_COLORS } from "@/lib/constants";
+import { getAuthUser } from "../lib/auth";
+import { ok, fail, unauthorized, notFound } from "../lib/response";
+import { ensureDefaultCategories } from "../lib/server-utils";
+import { CATEGORY_COLORS } from "../lib/constants";
 
 const router = Router();
 

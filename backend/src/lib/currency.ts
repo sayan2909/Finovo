@@ -1,5 +1,5 @@
-import { db } from "@/db";
-import { accounts, transactions, budgets, savingsGoals, recurringTransactions } from "@/db/schema";
+import { db } from "../db";
+import { accounts, transactions, budgets, savingsGoals, recurringTransactions } from "../db/schema";
 import { eq, sql } from "drizzle-orm";
 
 export const BASE_RATES_USD: Record<string, number> = {

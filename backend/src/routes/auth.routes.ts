@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { randomBytes } from "crypto";
 import { eq, and, sql } from "drizzle-orm";
-import { db, execRawSql } from "@/db";
+import { db, execRawSql } from "../db";
 import {
   users,
   sessions,
@@ -12,7 +12,7 @@ import {
   savingsGoals,
   recurringTransactions,
   notifications,
-} from "@/db/schema";
+} from "../db/schema";
 import {
   hashPassword,
   verifyPassword,
@@ -24,7 +24,7 @@ import {
   getAuthUser,
   getActiveSession,
   getTokenFromRequest,
-} from "@/lib/auth";
+} from "../lib/auth";
 import {
   createUserSession,
   listUserSessions,
@@ -32,12 +32,12 @@ import {
   destroyAllOtherSessions,
   destroySessionByToken,
   normalizeIp,
-} from "@/lib/session";
-import { ok, fail, unauthorized } from "@/lib/response";
-import { ensureDefaultCategories, ensureDefaultAccount } from "@/lib/server-utils";
-import { checkRateLimit, resetRateLimit, clearAllRateLimits } from "@/lib/rate-limit";
-import { convertAllUserAmounts } from "@/lib/currency";
-import { verifyTOTP } from "@/lib/totp";
+} from "../lib/session";
+import { ok, fail, unauthorized } from "../lib/response";
+import { ensureDefaultCategories, ensureDefaultAccount } from "../lib/server-utils";
+import { checkRateLimit, resetRateLimit, clearAllRateLimits } from "../lib/rate-limit";
+import { convertAllUserAmounts } from "../lib/currency";
+import { verifyTOTP } from "../lib/totp";
 
 // Ensure 2FA columns exist in users table immediately
 execRawSql(`

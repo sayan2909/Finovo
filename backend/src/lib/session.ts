@@ -1,6 +1,6 @@
 import type { Request } from "express";
-import { db } from "@/db";
-import { sessions } from "@/db/schema";
+import { db } from "../db";
+import { sessions } from "../db/schema";
 import { eq, and, ne, desc } from "drizzle-orm";
 
 export interface ParsedClientInfo {
