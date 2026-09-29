@@ -45,20 +45,29 @@ export function getTokenFromRequest(req: Request): string | null {
 }
 
 export function setAuthCookie(res: Response, token: string) {
+  const isProd = process.env.NODE_ENV === "production" || Boolean(process.env.VERCEL);
+  const sameSite = (process.env.COOKIE_SAME_SITE as "lax" | "strict" | "none") || (isProd ? "none" : "lax");
+  const secure = isProd && process.env.DISABLE_SECURE_COOKIE !== "true";
+
   res.cookie(AUTH_COOKIE, token, {
     httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production" && !process.env.DISABLE_SECURE_COOKIE,
+    sameSite,
+    secure,
     path: "/",
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 }
 
 export function clearAuthCookie(res: Response) {
+  const isProd = process.env.NODE_ENV === "production" || Boolean(process.env.VERCEL);
+  const sameSite = (process.env.COOKIE_SAME_SITE as "lax" | "strict" | "none") || (isProd ? "none" : "lax");
+  const secure = isProd && process.env.DISABLE_SECURE_COOKIE !== "true";
+
   res.clearCookie(AUTH_COOKIE, {
     path: "/",
     httpOnly: true,
-    sameSite: "lax",
+    sameSite,
+    secure,
   });
 }
 

@@ -95,6 +95,7 @@ router.post("/register", async (req, res) => {
               isCurrent: true,
             }
           : null,
+        token,
       },
       201
     );

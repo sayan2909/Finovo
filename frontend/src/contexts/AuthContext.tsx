@@ -87,6 +87,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (json.data?.requires2FA) {
       return { requires2FA: true, email: json.data.email };
     }
+    if (json.data?.token && typeof window !== "undefined") {
+      localStorage.setItem("finovo_token", json.data.token);
+    }
     setUser(json.data.user);
     setSession(json.data.session || null);
   };
@@ -100,6 +103,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
     const json = await res.json();
     if (!res.ok || !json.success) throw new Error(json.message || "Registration failed");
+    if (json.data?.token && typeof window !== "undefined") {
+      localStorage.setItem("finovo_token", json.data.token);
+    }
     if (json.data?.user) {
       setUser(json.data.user);
       setSession(json.data.session || null);
@@ -113,6 +119,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
     } catch (e) {
       console.error("Logout error", e);
+    }
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("finovo_token");
     }
     setUser(null);
     setSession(null);

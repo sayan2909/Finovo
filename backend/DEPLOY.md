@@ -1,74 +1,64 @@
 # Finovo Backend — Deployment Guide
 
-This guide covers deploying the **Finovo REST API Backend** independently to popular cloud providers.
+This guide covers deploying the **Finovo Express REST API Backend** independently to Vercel, Render, Railway, or Docker.
 
 ---
 
-## 1. Required Environment Variables
+## 1. Deploy to Vercel (Recommended Serverless)
 
-Before deploying, make sure you have these environment variables set in your hosting platform:
+1. Push your repository to GitHub.
+2. In [Vercel Dashboard](https://vercel.com/new), click **Add New...** → **Project**.
+3. Select your GitHub repository.
+4. In the **Configure Project** screen:
+   - **Root Directory**: Click *Edit* and select **`backend`**.
+   - **Framework Preset**: **Other**
+   - **Build Command**: `npm run build`
+5. Under **Environment Variables**, add:
+   - `DATABASE_URL`: Your Supabase pooler or Neon PostgreSQL connection URL.
+   - `JWT_SECRET`: A secure 32+ character random string.
+   - `NODE_ENV`: `production`
+   - `COOKIE_SAME_SITE`: `none`
+6. Click **Deploy**.
+7. Once finished, copy the backend URL (e.g., `https://finovo-backend.vercel.app`).
 
-| Variable | Description | Example |
-| :--- | :--- | :--- |
-| `DATABASE_URL` | PostgreSQL connection URL (Supabase, Neon, AWS RDS) | `postgresql://postgres:password@host:6543/postgres` |
-| `JWT_SECRET` | 32+ character random secret for signing JWT sessions | `fintrack_super_secret_2026_prod_key` |
-| `PORT` | Listening port (typically `5000` or provided by host) | `5000` |
-| `NODE_ENV` | Environment mode | `production` |
+> [!TIP]
+> The included `backend/api/index.ts` and `backend/vercel.json` automatically map all incoming API requests to the Express application as a Vercel serverless function.
 
 ---
 
 ## 2. Deploy to Render (Web Service)
 
-1. Push your code to GitHub.
-2. In [Render Dashboard](https://dashboard.render.com), click **New +** → **Web Service**.
-3. Connect your repository and configure:
+1. In [Render Dashboard](https://dashboard.render.com), click **New +** → **Web Service**.
+2. Connect your repository:
    - **Root Directory**: `backend`
-   - **Environment**: `Node` (or `Docker`)
-   - **Build Command**: `npm run build -- --webpack`
-   - **Start Command**: `npx next start -p $PORT`
-4. Under **Environment Variables**, add:
-   - `DATABASE_URL` = your PostgreSQL connection string
-   - `JWT_SECRET` = your secret key
-   - `NODE_ENV` = `production`
-5. Click **Create Web Service**.
-6. Once deployed, copy your backend URL (e.g., `https://fintrack-api.onrender.com`). You will need this for the frontend's `BACKEND_URL`.
+   - **Environment**: `Node`
+   - **Build Command**: `npm run build`
+   - **Start Command**: `npm run start`
+3. Add environment variables: `DATABASE_URL`, `JWT_SECRET`, `NODE_ENV=production`.
+4. Click **Create Web Service**.
 
 ---
 
 ## 3. Deploy to Railway
 
 1. In [Railway Dashboard](https://railway.app), click **New Project** → **Deploy from GitHub repo**.
-2. Select your repository.
-3. In service **Settings**:
-   - Set **Root Directory** to `backend`.
-   - Build command: `npm run build -- --webpack`
-   - Start command: `npx next start -p $PORT`
-4. In **Variables**, add `DATABASE_URL`, `JWT_SECRET`, and `NODE_ENV=production`.
-5. Under **Settings** → **Networking**, click **Generate Domain** to get your public API URL.
+2. Set **Root Directory** to `backend`.
+3. Build command: `npm run build`
+4. Start command: `npm run start`
+5. In **Variables**, add `DATABASE_URL`, `JWT_SECRET`, and `NODE_ENV=production`.
+6. Generate domain in **Settings** → **Networking**.
 
 ---
 
 ## 4. Deploy using Docker / VPS
 
-If deploying to a VPS (Ubuntu, Debian, DigitalOcean droplet):
-
 ```bash
 cd backend
-docker build -t fintrack-backend .
+docker build -t finovo-backend .
 docker run -d \
   -p 5000:5000 \
   -e DATABASE_URL="postgresql://..." \
   -e JWT_SECRET="your-secret" \
-  --name fintrack-api \
-  fintrack-backend
-```
-
----
-
-## 5. Seed Demo Data (Optional)
-
-After your backend is live, seed initial categories and demo data:
-
-```bash
-curl -X POST https://your-backend-url.com/api/seed-demo -H 'Content-Type: application/json' -d '{}'
+  --name finovo-api \
+  finovo-backend
 ```

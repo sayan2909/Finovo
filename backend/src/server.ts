@@ -29,16 +29,13 @@ const PORT = process.env.PORT || 5000;
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests from localhost:3000, 127.0.0.1:3000 or no-origin (mobile/curl/postman)
-      if (!origin || origin.includes("localhost") || origin.includes("127.0.0.1")) {
-        callback(null, true);
-      } else {
-        callback(null, true); // Permissive for self-hosted
-      }
+      // Dynamic origin reflection supports credentials on localhost and deployed Vercel apps
+      callback(null, true);
     },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization", "Cookie", "X-Requested-With", "Accept"],
+    exposedHeaders: ["Set-Cookie"],
   })
 );
 
@@ -102,6 +99,13 @@ async function startServer() {
   }
 }
 
-startServer();
+if (!process.env.VERCEL) {
+  startServer();
+} else {
+  // In Vercel serverless functions, initialize database asynchronously on cold start
+  ensureDatabaseReady().catch((err) => {
+    console.error("[Finovo Backend Vercel DB Init Error]:", err);
+  });
+}
 
 export default app;

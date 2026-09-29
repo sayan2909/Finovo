@@ -178,8 +178,8 @@ const isLocalhostPg =
 
 const shouldUseExternalPg =
   Boolean(databaseUrl) &&
-  !isLocalhostPg &&
-  process.env.USE_PGLITE !== "true";
+  (!isLocalhostPg || Boolean(process.env.VERCEL)) &&
+  (process.env.VERCEL ? true : process.env.USE_PGLITE !== "true");
 
 let readyResolve: () => void;
 const readyPromise = new Promise<void>((resolve) => {
@@ -202,7 +202,7 @@ function initDatabase() {
           connectionTimeoutMillis: 5000,
         });
 
-      if (process.env.NODE_ENV !== "production") {
+      if (process.env.NODE_ENV !== "production" || process.env.VERCEL) {
         globalForDb.__fintrackPool = pool;
       }
 
@@ -226,8 +226,10 @@ function initDatabase() {
     }
   }
 
-  // Embedded PGlite fallback
-  const dataDir = path.join(process.cwd(), "data", "pgdata");
+  // Embedded PGlite fallback (/tmp on Vercel read-only filesystem)
+  const dataDir = process.env.VERCEL
+    ? path.join("/tmp", "pgdata")
+    : path.join(process.cwd(), "data", "pgdata");
   if (!fs.existsSync(dataDir)) {
     fs.mkdirSync(dataDir, { recursive: true });
   }
