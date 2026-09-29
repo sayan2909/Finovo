@@ -136,7 +136,7 @@ export default function LoginPage() {
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -top-32 -right-32 h-[500px] w-[500px] rounded-full bg-emerald-500/10 blur-3xl" />
           <div className="absolute -bottom-32 -left-32 h-[400px] w-[400px] rounded-full bg-emerald-500/10 blur-3xl" />
-          <div className="absolute top-1/2 left-1/3 h-[300px] w-[300px] -translate-y-1/2 rounded-full bg-slate-50 dark:bg-white/[0.04] blur-2xl" />
+          <div className="absolute top-1/2 left-1/3 h-[300px] w-[300px] -translate-y-1/2 rounded-full bg-emerald-500/5 blur-3xl" />
         </div>
 
         <Link href="/" className="relative flex items-center gap-2.5 w-fit">

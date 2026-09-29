@@ -612,7 +612,7 @@ export default function RecurringPage() {
                 </div>
 
                 {/* Annual Projections */}
-                <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 dark:bg-slate-50 dark:bg-white/[0.04] dark:border-emerald-500/20 p-4 flex flex-col justify-between">
+                <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 dark:bg-emerald-500/10 dark:border-emerald-500/20 p-4 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">

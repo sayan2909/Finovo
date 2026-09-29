@@ -95,7 +95,7 @@ export function OnboardingModal() {
       color: "from-slate-900 to-black dark:from-[#181c22] dark:to-[#121519]",
       content: (
         <div className="space-y-3.5 pt-2">
-          <div className="flex items-start gap-3 rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-3.5 dark:border-emerald-500/20 dark:bg-slate-50 dark:bg-white/[0.04]">
+          <div className="flex items-start gap-3 rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-3.5 dark:border-emerald-500/20 dark:bg-emerald-500/10">
             <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white dark:bg-white/10 dark:text-white dark:border dark:border-white/10 font-bold shadow-sm">
               <CheckCircle2 className="h-4 w-4 stroke-[2.5]" />
             </div>

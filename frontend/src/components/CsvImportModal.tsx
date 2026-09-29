@@ -324,7 +324,7 @@ export function CsvImportModal({
             <div className="space-y-6">
               <div
                 onClick={() => fileInputRef.current?.click()}
-                className="group flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-300 p-10 text-center transition-all hover:border-emerald-500 hover:bg-slate-50 dark:bg-white/[0.04] dark:border-slate-700 dark:hover:border-emerald-500/30 dark:hover:bg-slate-50 dark:bg-white/[0.04] cursor-pointer"
+                className="group flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-300 p-10 text-center transition-all hover:border-emerald-500 hover:bg-slate-50 dark:bg-white/[0.04] dark:border-slate-700 dark:hover:border-emerald-500/30 dark:hover:bg-white/[0.06] cursor-pointer"
               >
                 <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/10 text-slate-950 shadow-sm transition-transform group-hover:scale-110 dark:bg-emerald-500/10 dark:text-emerald-400 font-black">
                   <Upload className="h-8 w-8 stroke-[2.5]" />

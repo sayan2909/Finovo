@@ -999,7 +999,7 @@ function TransactionsContent() {
         <form onSubmit={save} className="grid gap-4 sm:grid-cols-2">
           {/* Quick Receipt Scan Banner for New Transactions */}
           {!editing && (
-            <div className="sm:col-span-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 rounded-2xl border border-dashed border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/[0.04] p-3 dark:bg-slate-50 dark:bg-white/[0.04]">
+            <div className="sm:col-span-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 rounded-2xl border border-dashed border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/[0.04] p-3">
               <div className="flex items-center gap-2.5">
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-500">
                   <Scan className="h-4 w-4" />
