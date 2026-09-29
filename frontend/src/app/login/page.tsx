@@ -78,6 +78,31 @@ export default function LoginPage() {
     }
   };
 
+  const [resetting2FA, setResetting2FA] = useState(false);
+
+  const handleEmergencyReset2FA = async () => {
+    setErr("");
+    setResetting2FA(true);
+    try {
+      const res = await fetch("/api/auth/2fa/reset-emergency", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to reset 2FA");
+      }
+      await login(email, password);
+      router.push("/dashboard");
+    } catch (e2: unknown) {
+      const msg = e2 instanceof Error ? e2.message : "Unable to reset 2FA";
+      setErr(msg);
+      setResetting2FA(false);
+    }
+  };
+
   const handle2FASubmit = async (e?: React.FormEvent, codeToVerify?: string) => {
     if (e) e.preventDefault();
     const code = codeToVerify || twoFactorCode;
@@ -327,6 +352,17 @@ export default function LoginPage() {
                     >
                       ← Back to password sign in
                     </button>
+
+                    <div className="pt-3 mt-1 border-t border-slate-100 dark:border-white/[0.06] text-center">
+                      <button
+                        type="button"
+                        onClick={handleEmergencyReset2FA}
+                        disabled={resetting2FA}
+                        className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 hover:underline transition cursor-pointer"
+                      >
+                        {resetting2FA ? "Resetting 2FA..." : "Lost authenticator? Reset & Sign In"}
+                      </button>
+                    </div>
                   </div>
                 </form>
               ) : (
