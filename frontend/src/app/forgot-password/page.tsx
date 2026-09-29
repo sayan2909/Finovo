@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Wallet, Mail, ArrowRight, CheckCircle2, Copy, Check, ArrowLeft } from "lucide-react";
 import { Button, Field, inputCls, toast } from "@/components/ui";
+import { BrandLogo } from "@/components/BrandLogo";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -60,9 +61,7 @@ export default function ForgotPasswordPage() {
         </div>
 
         <Link href="/" className="relative flex items-center gap-2.5 w-fit">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900 text-white dark:bg-white/10 dark:text-white dark:border dark:border-white/10 font-bold shadow-lg shadow-xs">
-            <Wallet className="h-5 w-5" />
-          </div>
+          <BrandLogo size="lg" />
           <span className="text-xl font-extrabold tracking-tight">Finovo</span>
         </Link>
         <div className="relative">
@@ -90,9 +89,7 @@ export default function ForgotPasswordPage() {
         {/* Mobile header */}
         <div className="relative z-10 flex items-center px-6 pt-7 pb-2 lg:hidden">
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white dark:bg-white/10 dark:text-white dark:border dark:border-white/10 font-bold shadow-md shadow-xs">
-              <Wallet className="h-5 w-5 stroke-[2.5]" />
-            </div>
+            <BrandLogo size="md" />
             <span className="font-black text-lg tracking-tight text-slate-900 dark:text-white">Finovo</span>
           </Link>
         </div>

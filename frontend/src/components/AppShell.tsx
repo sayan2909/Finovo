@@ -15,6 +15,7 @@ import { Modal, Button, toast } from "@/components/ui";
 import { OnboardingModal } from "@/components/OnboardingModal";
 import { SessionTimeoutModal } from "@/components/SessionTimeoutModal";
 import FinBotAssistant from "@/components/FinBotAssistant";
+import { BrandLogo } from "@/components/BrandLogo";
 import { SUPPORTED_CURRENCIES, CURRENCY_SYMBOLS, getEstimatedRate, fetchLiveRates } from "@/lib/currency";
 import { predictCategory } from "@/lib/categorizer";
 
@@ -212,9 +213,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     <div className="flex h-full flex-col">
       <div className={`flex items-center ${isSidebarCollapsed ? "justify-center" : "justify-between"} px-1 py-1`}>
         <Link href="/dashboard" className="flex items-center gap-2.5 group" title="Finovo Dashboard">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white dark:bg-white/[0.08] dark:border dark:border-white/10 shadow-xs group-hover:scale-105 transition-transform font-bold">
-            <Wallet className="h-5 w-5 text-white dark:text-emerald-400" />
-          </div>
+          <BrandLogo size="md" className="group-hover:scale-105 transition-transform" />
           {!isSidebarCollapsed && (
             <div>
               <div className="flex items-center gap-1.5">
@@ -342,12 +341,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             </button>
 
             {/* Mobile Brand */}
-            <div className="flex items-center gap-2 lg:hidden">
-              <div className="flex h-7 w-7 items-center justify-center rounded-xl bg-slate-900 text-white dark:bg-white/[0.08] dark:border dark:border-white/10 font-bold text-xs shadow-xs">
-                <span className="text-white dark:text-emerald-400">F</span>
-              </div>
+            <Link href="/dashboard" className="flex items-center gap-2 lg:hidden">
+              <BrandLogo size="sm" />
               <span className="font-bold text-sm tracking-tight text-slate-900 dark:text-white">Finovo</span>
-            </div>
+            </Link>
 
             {/* Quick Search with shortcut */}
             <div className="hidden items-center gap-2 rounded-xl border border-slate-200/90 bg-slate-100/70 px-3 py-1.5 text-sm text-slate-600 md:flex dark:border-white/[0.08] dark:bg-[#181c22] dark:text-slate-400 focus-within:border-emerald-500 focus-within:bg-white dark:focus-within:bg-[#1a1e24] focus-within:ring-2 focus-within:ring-emerald-500/20 transition shadow-2xs">

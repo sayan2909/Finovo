@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Shield, Lock, Wallet, Trash2, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Shield, Lock, Trash2, CheckCircle2 } from "lucide-react";
+import { BrandLogo } from "@/components/BrandLogo";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -17,9 +18,7 @@ export default function PrivacyPolicyPage() {
             <span>Back to Finovo</span>
           </Link>
           <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-900 text-white dark:bg-white/10 dark:text-white dark:border dark:border-white/10 font-bold">
-              <Wallet className="h-4 w-4 stroke-[2.5]" />
-            </div>
+            <BrandLogo size="xs" />
             <span className="font-extrabold text-sm tracking-tight text-slate-900 dark:text-white">
               Finovo
             </span>

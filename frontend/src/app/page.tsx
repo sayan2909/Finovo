@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTheme } from "@/contexts/ThemeContext";
+import { BrandLogo } from "@/components/BrandLogo";
 
 const FEATURES = [
   { icon: Receipt,   title: "Expense Tracking",   desc: "Log income & expenses in seconds with smart categories, search, filters and payment methods.", color: "from-indigo-500 to-blue-500",    glow: "shadow-indigo-500/30" },
@@ -50,9 +51,7 @@ export default function LandingPage() {
       }`}>
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white dark:bg-white/10 dark:text-white dark:border dark:border-white/10 font-bold shadow-xs">
-              <Wallet className="h-5 w-5" />
-            </div>
+            <BrandLogo size="md" />
             <span className="text-lg font-extrabold tracking-tight text-slate-900 dark:text-white">Finovo</span>
           </div>
           <nav className="hidden items-center gap-7 text-sm font-medium text-slate-600 dark:text-slate-300 md:flex">
